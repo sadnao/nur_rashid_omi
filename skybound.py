@@ -152,8 +152,8 @@ while not game_over:
 
     #Show current airport status
     airport = get_airport_info(current_airport)
-    print(f"\nYou are at {airport['name']}.")
-    print(f"You have {money:.0f}$ and {fuel:.0f}fuel.")
+    print(f"\nYou are at \033[34m{airport['name']}.\033[0m")
+    print(f"You have \033[35m{money:.0f}$ and {fuel:.0f}fuel.\033[0m")
     input("Press Enter to continue...")
 
     #Buy fuel
@@ -163,7 +163,7 @@ while not game_over:
         if cost <= money:
             money -= cost
             fuel += cost * 2
-            print(f"Bought {cost*2} fuel. New fuel: {fuel:.0f}fuel")
+            print(f"\033[34mBought {cost*2} fuel. New fuel: {fuel:.0f}fuel\033m")
         else:
             print("Not enough money!")
 
@@ -171,15 +171,14 @@ while not game_over:
     airports = airports_in_range(current_airport, all_airports, fuel)
     if len(airports) == 0:
         print("You are out of range! Game over.")
-        game_over = True
         break
 
-    print(f"\nThere are {len(airports)} airports in range:")
+    print(f"\nThere are \033[34m{len(airports)} airports in range:\033[0m")
     print("Airports:")
     for airport in airports:
         dist = calculate_distance(current_airport, airport['ident'])
         fuel_needed = math.ceil(dist / 3)
-        print(f"{airport['name']}, icao: {airport['ident']}, distance: {dist:.0f} km, fuel needed: {fuel_needed}")
+        print(f"\033[32m{airport['name']}, icao: {airport['ident']}, distance: {dist:.0f} km, fuel needed: {fuel_needed}\033[0m")
 
     #Choose destination
     dest = input("\nEnter destination ICAO: ").upper()
@@ -197,21 +196,21 @@ while not game_over:
 
     #Give fixed delivery money
     money += 200
-    print(f"\nDelivery completed! +200$")
+    print(f"\033[34m\nDelivery completed! +200$\033[0m")
 
     #Show airport status before event
     airport = get_airport_info(current_airport)
-    print(f"You are at {airport['name']}.")
-    print(f"You have {money:.0f}$ and {fuel:.0f}fuel.")
+    print(f"You are at \033[35m{airport['name']}.\033[0m")
+    print(f"You have \033[35m{money:.0f}$ and {fuel:.0f}fuel.\033[0m")
     input("Press Enter to continue...")
 
-    #Check if this airport has a pre-assigned event
+    #Check if this airport has an event
     event = check_event(game_id, current_airport)
 
     if event:
 
         if event['type'] == "Pirates":
-                print("\nEvent triggered: Pirates attacked! All money lost! But you found some fuel.")
+                print("\033[34m\nEvent triggered: Pirates attacked! All money lost! But you found some fuel.\033[0m")
                 money = 0
                 fuel += 50
                 print("Fuel: +50")
@@ -221,7 +220,7 @@ while not game_over:
             # for other events
             money += event['money']
             fuel += event['fuel']
-            print(f"\nEvent triggered: {event['description']}")
+            print(f"\033[34m\nEvent triggered: {event['description']}\033[0m")
             if event['money']:
                 print(f"Money: {event['money']:+}$")
             if event['fuel']:
