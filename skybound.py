@@ -116,7 +116,7 @@ def update_location(icao, fuel_range, u_money, game_id):
 
 # game starts
 # ask to show the story
-storyDialog = input('Welcome to SKYBOUND EXPRESS. Do you want to read the background story? (Y/N): ')
+storyDialog = input('\033[34mWelcome to SKYBOUND EXPRESS. Do you want to read the background story? (Y/N):\033[0m ')
 if storyDialog == 'Y':
     # print wrapped string line by line
     for line in story.getStory():
@@ -152,7 +152,8 @@ while not game_over:
 
     #Show current airport status
     airport = get_airport_info(current_airport)
-    print(f"\nYou are at \033[34m{airport['name']}.\033[0m")
+    print(f"\nYou are at \033[35"
+          f"m{airport['name']}.\033[0m")
     print(f"You have \033[35m{money:.0f}$ and {fuel:.0f}fuel.\033[0m")
     input("Press Enter to continue...")
 
@@ -163,7 +164,7 @@ while not game_over:
         if cost <= money:
             money -= cost
             fuel += cost * 2
-            print(f"\033[34mBought {cost*2} fuel. New fuel: {fuel:.0f}fuel\033m")
+            print(f"\033[34mBought {cost*2} fuel. New fuel: {fuel:.0f}fuel\033[0m")
         else:
             print("Not enough money!")
 
@@ -249,7 +250,6 @@ while not game_over:
 
 # if game is over loop stops
 # show game result
-print(f'''{'You won!' if game_over else 'You lost!'}''')
 print(f'''You have {money:.0f}$''')
 print(f'''You have {fuel:.0f}fuel''')
 
