@@ -174,12 +174,12 @@ while not game_over:
         print("You are out of range! Game over.")
         break
 
-    print(f"\nThere are \033[34m{len(airports)} airports in range:\033[0m")
+    print(f"\nThere are \033[36m{len(airports)}\033[0m airports in range:")
     print("Airports:")
     for airport in airports:
         dist = calculate_distance(current_airport, airport['ident'])
         fuel_needed = math.ceil(dist / 3)
-        print(f"\033[32m{airport['name']}, icao: {airport['ident']}, distance: {dist:.0f} km, fuel needed: {fuel_needed}\033[0m")
+        print(f"{airport['name']}, icao: {airport['ident']}, \033[33m distance: {dist:.0f} km\033[0m, \033[32m fuel needed: {fuel_needed}\033[0m ")
 
     #Choose destination
     dest = input("\nEnter destination ICAO: ").upper()
